@@ -1,8 +1,18 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { heightPercentageToDP  as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import Button from '../components/Button';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-const Splash = () => {
+export type TopNavigatorParamsList = {
+  Splash: undefined,
+  SignUp: undefined
+}
+export interface SplashProps {
+  navigation: StackNavigationProp<TopNavigatorParamsList, 'Splash'>;
+}
+
+const Splash = ({ navigation }: SplashProps) => {
+
   return (
       <View 
         style={styles.container}
@@ -26,14 +36,20 @@ const Splash = () => {
         <Text 
           style={styles.subheading}
         >
-         ------- Your Personal Fitness Companion -------
+          Your Personal Fitness Companion
         </Text>
-
         <View
           style={styles.buttonContainer}
         >
-          <Button label='Get started' outline />
-          <Button label='Log in' />
+          <Button 
+            label='Get started'
+            outline
+            onPress={() => navigation.navigate('SignUp')}
+          />
+          <Button 
+            label='Log in'
+            onPress={() => {}} 
+          />
         </View>
       </View>
   )
@@ -43,7 +59,8 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       alignItems: 'center',
-      marginTop: hp('9%')
+      paddingTop: hp('9%'),
+      backgroundColor: 'white'
     },
     headingContainer: {
       textAlign: 'center',
@@ -68,7 +85,7 @@ const styles = StyleSheet.create({
     subheading: {
       textAlign: 'center',
       textAlignVertical: 'center',
-      fontSize: hp('1.5%'),
+      fontSize: hp('1.75%'),
       color: '#8BC53F'
     },
     image: {
@@ -82,7 +99,7 @@ const styles = StyleSheet.create({
       flex: 1,
       gap: hp('1.5%'),
       paddingTop: hp('45%'),
-      width: wp('66%')
+      width: wp('90%')
     }
   });
 
