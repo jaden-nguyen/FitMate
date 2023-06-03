@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import { heightPercentageToDP  as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import Button from '../components/Button';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { horizontalScale, moderateScale, verticalScale } from '../scales';
 
 export type TopNavigatorParamsList = {
   Splash: undefined,
@@ -23,12 +24,12 @@ const Splash = ({ navigation }: SplashProps) => {
         />
         <View style={styles.headingContainer}>
           <Text 
-            style={styles.headingFit}
+            style={[styles.heading, { color: '#8BC53F'}]}
           >
             FIT
           </Text>
           <Text 
-            style={styles.headingMate}
+            style={[styles.heading, { color: '#63CF66'}]}
           >
             MATE
           </Text>
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       alignItems: 'center',
-      paddingTop: hp('9%'),
+      paddingTop: verticalScale(65),
       backgroundColor: 'white'
     },
     headingContainer: {
@@ -72,34 +73,29 @@ const styles = StyleSheet.create({
       resizeMode: "cover",
       zIndex: -1
     },
-    headingFit: {
-      fontSize: hp('8%'),
+    heading: {
+      fontSize: moderateScale(80),
       fontWeight: '600',
       color: '#8BC53F'
-    },
-    headingMate: {
-      fontSize: hp('8%'),
-      fontWeight: '600',
-      color: '#63CF66'
     },
     subheading: {
       textAlign: 'center',
       textAlignVertical: 'center',
-      fontSize: hp('1.75%'),
+      fontSize: moderateScale(17),
       color: '#8BC53F'
     },
     image: {
-      width: hp('15%'),
-      height: hp('15%'),
+      width: horizontalScale(150),
+      height: verticalScale(150),
       resizeMode: 'contain',
       alignItems: 'center',
       justifyContent: 'center',
     },
     buttonContainer: {
       flex: 1,
-      gap: hp('1.5%'),
-      paddingTop: hp('45%'),
-      width: wp('90%')
+      gap: moderateScale(15),
+      paddingTop: verticalScale(400),
+      width: horizontalScale(380)
     }
   });
 
