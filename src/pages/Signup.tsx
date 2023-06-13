@@ -1,23 +1,24 @@
-import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Text, StyleSheet, SafeAreaView, TextInput } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { SplashProps } from './Splash';
-import { moderateScale, verticalScale } from '../scales';
-import * as Font from 'expo-font';
-import { useEffect, useState } from 'react';
+import { horizontalScale, moderateScale, verticalScale } from '../scales';
+import { useFonts } from 'expo-font';
 import Button from '../components/Button';
+import AppLoading from 'expo-app-loading';
+import Input from '../components/Input';
+import { useState } from 'react';
 
 const SignUp: React.FC<SplashProps> = ({ navigation }) => {
-  const [email, setEmail] = useState('');
-  const loadFonts = async () => {
-    await Font.loadAsync({
-      'Proxima-Nova': require('../../assets/fonts/Proxima-Nova-Font.otf')
-    });
-  };
+  const loadFonts = useFonts({
+    'Proxima-Nova': require('../../assets/fonts/Proxima-Nova-Font.otf')
+  });
 
-  useEffect(() => {
-    loadFonts();
-  }, []);
+  if (!loadFonts) {
+    return <AppLoading />;
+  }
+  const [email, setEmail] = useState('');
+  const isEmailValid = email.trim().length === 0;
 
   const handlePress = () => {
     console.log(email);
@@ -31,16 +32,17 @@ const SignUp: React.FC<SplashProps> = ({ navigation }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.container}>
-        <Text style={styles.heading}>First off, enter your email address</Text>
-        <View style={styles.input}>
-          <TextInput
-            onChangeText={setEmail}
-            placeholder="Email"
-            placeholderTextColor={'rgba(206,207,201,255)'}
-          />
-        </View>
+        <Text style={styles.heading}>First off, enter your email</Text>
+        <Input setEmail={setEmail} />
       </View>
-      <Button label="Agree & continue" outline onPress={handlePress} />
+      <View style={styles.button}>
+        <Button
+          label="Agree & continue"
+          outline
+          onPress={handlePress}
+          disabled={isEmailValid}
+        />
+      </View>
     </SafeAreaView>
   );
 };
@@ -57,12 +59,14 @@ const styles = StyleSheet.create({
   heading: {
     fontFamily: 'Proxima-Nova',
     fontWeight: '600',
-    fontSize: moderateScale(35)
+    fontSize: moderateScale(35),
+    marginBottom: verticalScale(20)
   },
-  input: {
-    borderColor: 'rgba(206,207,201,255)',
-    borderWidth: 1,
-    color: 'rgba(206,207,201,255)'
+  button: {
+    width: horizontalScale(380),
+    left: horizontalScale(15),
+    paddingLeft: 7.5,
+    paddingRight: 5
   }
 });
 
