@@ -2,22 +2,28 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import Button from '../components/Button';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { horizontalScale, moderateScale, verticalScale } from '../scales';
-import { useFonts } from 'expo-font';
+import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
+import { colors } from '../colors';
+import { Divider } from '@rneui/themed';
 
 export type TopNavigatorParamsList = {
   Splash: undefined;
   SignUp: undefined;
+  PassSignUp: undefined;
 };
 export interface SplashProps {
   navigation: StackNavigationProp<TopNavigatorParamsList, 'Splash'>;
+  pages: 1 | 2;
 }
 
 const Splash: React.FC<SplashProps> = ({ navigation }) => {
-  const loadFonts = useFonts({
-    'Proxima-Nova': require('../../assets/fonts/Proxima-Nova-Font.otf')
-  });
+  const loadFonts = async () => {
+    await Font.loadAsync({
+      'AvenirNext-Regular': require('../../assets/fonts/AvenirNextLTPro-Regular.otf')
+    });
+  };
 
   if (!loadFonts) {
     return <AppLoading />;
@@ -26,8 +32,12 @@ const Splash: React.FC<SplashProps> = ({ navigation }) => {
     <LinearGradient colors={['#2E2F2F', '#D1D6BA']} style={styles.container}>
       <Image source={require('../../assets/logo1.png')} style={styles.image} />
       <View style={styles.headingContainer}>
-        <Text style={[styles.heading, { color: '#8BC53F' }]}>FIT</Text>
-        <Text style={[styles.heading, { color: '#63CF66' }]}>MATE</Text>
+        <Text style={[styles.heading, { color: colors.secondary_green }]}>
+          FIT
+        </Text>
+        <Text style={[styles.heading, { color: colors.primary_green }]}>
+          MATE
+        </Text>
       </View>
       <Text style={styles.subheading}>Your Personal Fitness Companion</Text>
       <View style={styles.buttonContainer}>
@@ -36,6 +46,7 @@ const Splash: React.FC<SplashProps> = ({ navigation }) => {
           outline
           onPress={() => navigation.navigate('SignUp')}
         />
+        <Divider width={0.5} color="gray" />
         <Button label="Log in" onPress={() => {}} />
       </View>
     </LinearGradient>
@@ -61,14 +72,14 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: moderateScale(80),
     fontWeight: '600',
-    fontFamily: 'Proxima-Nova'
+    fontFamily: 'AvenirNext-Regular'
   },
   subheading: {
     textAlign: 'center',
     textAlignVertical: 'center',
     fontSize: moderateScale(17),
-    color: '#8BC53F',
-    fontFamily: 'Proxima-Nova',
+    color: colors.secondary_green,
+    fontFamily: 'AvenirNext-Regular',
     fontWeight: '600'
   },
   image: {

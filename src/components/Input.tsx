@@ -1,15 +1,18 @@
 import { StyleSheet, TextInput } from 'react-native';
-import { useFonts } from 'expo-font';
+import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import { colors } from '../colors';
 
 interface InputProps {
   setEmail?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const Input: React.FC<InputProps> = ({ setEmail }) => {
-  const loadFonts = useFonts({
-    'Proxima-Nova': require('../../assets/fonts/Proxima-Nova-Font.otf')
-  });
+  const loadFonts = async () => {
+    await Font.loadAsync({
+      'AvenirNext-Regular': require('../../assets/fonts/AvenirNextLTPro-Regular.otf')
+    });
+  };
 
   if (!loadFonts) {
     return <AppLoading />;
@@ -18,7 +21,7 @@ const Input: React.FC<InputProps> = ({ setEmail }) => {
     <TextInput
       onChangeText={setEmail}
       placeholder="Email address"
-      placeholderTextColor={'rgba(206,207,201,255)'}
+      placeholderTextColor={colors.gray}
       style={styles.input}
     />
   );
@@ -29,9 +32,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     padding: 10,
-    borderColor: 'rgba(206,207,201,255)',
-    color: 'rgba(206,207,201,255)',
-    fontFamily: 'Proxima-Nova'
+    borderColor: colors.gray,
+    color: colors.gray,
+    fontFamily: 'AvenirNext-Regular'
   }
 });
 export default Input;

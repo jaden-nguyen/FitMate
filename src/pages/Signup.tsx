@@ -1,18 +1,23 @@
-import { View, Text, StyleSheet, SafeAreaView, TextInput } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/AntDesign';
+import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
+// import { TouchableOpacity } from 'react-native-gesture-handler';
+// import Icon from 'react-native-vector-icons/AntDesign';
+// import Square from 'react-native-vector-icons/FontAwesome';
 import { SplashProps } from './Splash';
 import { horizontalScale, moderateScale, verticalScale } from '../scales';
-import { useFonts } from 'expo-font';
+import * as Font from 'expo-font';
 import Button from '../components/Button';
 import AppLoading from 'expo-app-loading';
 import Input from '../components/Input';
 import { useState } from 'react';
+import { colors } from '../colors';
+import SignUpNav from '../components/navbar/Navbar';
 
 const SignUp: React.FC<SplashProps> = ({ navigation }) => {
-  const loadFonts = useFonts({
-    'Proxima-Nova': require('../../assets/fonts/Proxima-Nova-Font.otf')
-  });
+  const loadFonts = async () => {
+    await Font.loadAsync({
+      'AvenirNext-Regular': require('../../assets/fonts/AvenirNextLTPro-Regular.otf')
+    });
+  };
 
   if (!loadFonts) {
     return <AppLoading />;
@@ -20,26 +25,28 @@ const SignUp: React.FC<SplashProps> = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const isEmailValid = email.trim().length === 0;
 
-  const handlePress = () => {
-    console.log(email);
-  };
-
   return (
     <SafeAreaView>
-      <View style={styles.top}>
-        <TouchableOpacity onPress={navigation.goBack}>
-          <Icon name="left" size={moderateScale(30)} />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.container}>
+      <SignUpNav navigation={navigation} pages={1} />
+      <View style={styles.heading_container}>
         <Text style={styles.heading}>First off, enter your email</Text>
         <Input setEmail={setEmail} />
       </View>
-      <View style={styles.button}>
+      <View style={styles.button_container}>
+        <Text style={styles.terms}>
+          These terms and conditions ("Terms") govern your use of the FitMate
+          mobile application ("App") provided by the Company. By using the App,
+          you agree to be bound by these Terms. If you do not agree with any
+          part of these Terms, you must not use the App. Privacy a. The Company
+          respects your privacy and handles your personal information in
+          accordance with its Privacy Policy. b. By using the App, you consent
+          to the collection, use, and storage of your personal information as
+          outlined in the Privacy Policy.
+        </Text>
         <Button
           label="Agree & continue"
           outline
-          onPress={handlePress}
+          onPress={() => navigation.navigate('PassSignUp')}
           disabled={isEmailValid}
         />
       </View>
@@ -48,25 +55,31 @@ const SignUp: React.FC<SplashProps> = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  top: {
-    borderBottomWidth: 1,
-    borderColor: 'rgba(128, 128, 128, 0.5)',
-    marginTop: verticalScale(25)
-  },
-  container: {
-    margin: moderateScale(25)
+  heading_container: {
+    margin: moderateScale(25),
+    width: horizontalScale(350),
+    gap: verticalScale(10)
   },
   heading: {
-    fontFamily: 'Proxima-Nova',
+    fontFamily: 'AvenirNext-Regular',
     fontWeight: '600',
     fontSize: moderateScale(35),
     marginBottom: verticalScale(20)
   },
-  button: {
-    width: horizontalScale(380),
-    left: horizontalScale(15),
-    paddingLeft: 7.5,
-    paddingRight: 5
+  button_container: {
+    flex: 1,
+    gap: verticalScale(10),
+    width: horizontalScale(350),
+    left: horizontalScale(25),
+    marginTop: verticalScale(10),
+    padding: moderateScale(10),
+    backgroundColor: colors.gray,
+    borderRadius: moderateScale(5)
+  },
+  terms: {
+    fontSize: moderateScale(10),
+    color: 'black',
+    opacity: 0.7
   }
 });
 

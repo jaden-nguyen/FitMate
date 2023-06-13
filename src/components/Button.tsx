@@ -1,8 +1,9 @@
 import { Text, StyleSheet, TouchableHighlight } from 'react-native';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { verticalScale } from '../scales';
-import { useFonts } from 'expo-font';
+import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import { colors } from '../colors';
 
 interface buttonProps {
   label?: string;
@@ -17,9 +18,11 @@ const Button: React.FC<buttonProps> = ({
   onPress,
   disabled
 }) => {
-  const loadFonts = useFonts({
-    'Proxima-Nova': require('../../assets/fonts/Proxima-Nova-Font.otf')
-  });
+  const loadFonts = async () => {
+    await Font.loadAsync({
+      'AvenirNext-Regular': require('../../assets/fonts/AvenirNextLTPro-Regular.otf')
+    });
+  };
 
   if (!loadFonts) {
     return <AppLoading />;
@@ -27,15 +30,15 @@ const Button: React.FC<buttonProps> = ({
 
   const styles = StyleSheet.create({
     button: {
-      color: outline ? 'white' : 'rgb(99, 207, 102)',
-      backgroundColor: outline ? 'rgb(99, 207, 102)' : '',
+      color: outline ? 'white' : colors.primary_green,
+      backgroundColor: outline ? colors.primary_green : 'transparent',
       textAlign: 'center',
       lineHeight: verticalScale(45),
       fontSize: verticalScale(20),
       height: verticalScale(45),
       borderRadius: hp('1.3%'),
       overflow: 'hidden',
-      fontFamily: 'Proxima-Nova',
+      fontFamily: 'AvenirNext-Regular',
       fontWeight: '600',
       opacity: disabled ? 0.6 : 1
     },
