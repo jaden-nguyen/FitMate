@@ -1,13 +1,22 @@
-import { StyleSheet, TextInput } from 'react-native';
+import { StyleSheet, TextInput, KeyboardTypeOptions } from 'react-native';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { colors } from '../colors';
 
 interface InputProps {
-  setEmail?: React.Dispatch<React.SetStateAction<string>>;
+  placeholder?: string;
+  onChangeText?: (text: string) => void;
+  keyboardType?: KeyboardTypeOptions;
+  editable?: boolean;
+  secureTextEntry?: boolean;
 }
 
-const Input: React.FC<InputProps> = ({ setEmail }) => {
+const Input: React.FC<InputProps> = ({
+  onChangeText,
+  keyboardType,
+  placeholder,
+  secureTextEntry
+}) => {
   const loadFonts = async () => {
     await Font.loadAsync({
       'AvenirNext-Regular': require('../../assets/fonts/AvenirNextLTPro-Regular.otf')
@@ -19,10 +28,12 @@ const Input: React.FC<InputProps> = ({ setEmail }) => {
   }
   return (
     <TextInput
-      onChangeText={setEmail}
-      placeholder="Email address"
+      onChangeText={onChangeText}
+      placeholder={placeholder}
       placeholderTextColor={colors.gray}
       style={styles.input}
+      keyboardType={keyboardType}
+      secureTextEntry={secureTextEntry}
     />
   );
 };

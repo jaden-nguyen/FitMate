@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   squares: {
     flexDirection: 'row',
     gap: horizontalScale(15),
-    left: horizontalScale(125)
+    left: horizontalScale(135)
   }
 });
 export default SignUpNav;
