@@ -1,7 +1,7 @@
 {
-  "trailingComma": "none",
+  "arrowParens": "always",
+  "semi": true,
   "tabWidth": 2,
   "proseWrap": "always",
-  "printWidth": 100,
-  "semi": true
+  "printWidth": 100
 }
