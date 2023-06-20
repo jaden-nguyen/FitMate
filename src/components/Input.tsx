@@ -1,7 +1,7 @@
-import { StyleSheet, TextInput, KeyboardTypeOptions } from 'react-native';
-import * as Font from 'expo-font';
-import AppLoading from 'expo-app-loading';
-import { colors } from '../colors';
+import { StyleSheet, TextInput, KeyboardTypeOptions } from "react-native";
+import * as Font from "expo-font";
+import AppLoading from "expo-app-loading";
+import { colors } from "../colors";
 
 interface InputProps {
   placeholder?: string;
@@ -19,7 +19,7 @@ const Input: React.FC<InputProps> = ({
 }) => {
   const loadFonts = async () => {
     await Font.loadAsync({
-      'AvenirNext-Regular': require('../../assets/fonts/AvenirNextLTPro-Regular.otf')
+      "AvenirNext-Regular": require("../../assets/fonts/AvenirNextLTPro-Regular.otf")
     });
   };
 
@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     borderColor: colors.gray,
-    color: colors.gray,
-    fontFamily: 'AvenirNext-Regular'
+    color: "black",
+    fontFamily: "AvenirNext-Regular"
   }
 });
 export default Input;
