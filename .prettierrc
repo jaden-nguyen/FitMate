@@ -3,5 +3,5 @@
   "semi": true,
   "tabWidth": 2,
   "proseWrap": "always",
-  "printWidth": 100
+  "printWidth": 75
 }

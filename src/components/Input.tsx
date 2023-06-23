@@ -9,17 +9,19 @@ interface InputProps {
   keyboardType?: KeyboardTypeOptions;
   editable?: boolean;
   secureTextEntry?: boolean;
+  autoFocus?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
   onChangeText,
   keyboardType,
   placeholder,
-  secureTextEntry
+  secureTextEntry,
+  autoFocus,
 }) => {
   const loadFonts = async () => {
     await Font.loadAsync({
-      "AvenirNext-Regular": require("../../assets/fonts/AvenirNextLTPro-Regular.otf")
+      "AvenirNext-Regular": require("../../assets/fonts/AvenirNextLTPro-Regular.otf"),
     });
   };
 
@@ -34,6 +36,7 @@ const Input: React.FC<InputProps> = ({
       style={styles.input}
       keyboardType={keyboardType}
       secureTextEntry={secureTextEntry}
+      autoFocus={autoFocus}
     />
   );
 };
@@ -45,7 +48,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderColor: colors.gray,
     color: "black",
-    fontFamily: "AvenirNext-Regular"
-  }
+    fontFamily: "AvenirNext-Regular",
+  },
 });
 export default Input;

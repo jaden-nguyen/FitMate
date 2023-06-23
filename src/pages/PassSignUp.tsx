@@ -1,4 +1,10 @@
-import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import {
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { SplashProps } from "./Splash";
 import SignUpNav from "../components/navbar/Navbar";
 import Heading from "../components/Heading";
@@ -8,6 +14,7 @@ import Button from "../components/Button";
 import { useEffect, useState } from "react";
 import Subheading from "../components/Subheading";
 import Icon from "react-native-vector-icons/Entypo";
+import { StatusBar } from "expo-status-bar";
 
 const PassSignUp: React.FC<SplashProps> = ({ navigation }) => {
   const [password, setPassword] = useState("");
@@ -16,7 +23,10 @@ const PassSignUp: React.FC<SplashProps> = ({ navigation }) => {
   const [match, setMatch] = useState(false);
   const [lockIcon, setLockIcon] = useState(true);
   const [strength, setStrength] = useState("");
-  const isValid = password.trim().length === 0;
+  const isValid =
+    password.trim().length === 0 ||
+    otherPass.trim().length === 0 ||
+    !match;
 
   const showPass = () => {
     setSecureText(!secureText);
@@ -26,6 +36,7 @@ const PassSignUp: React.FC<SplashProps> = ({ navigation }) => {
   useEffect(() => {
     checkMatch();
   }, [otherPass]);
+
   const checkMatch = (): void => {
     if (otherPass === password) {
       setMatch(true);
@@ -38,7 +49,8 @@ const PassSignUp: React.FC<SplashProps> = ({ navigation }) => {
     setPassword(text);
 
     if (!password) setStrength("");
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     const isPasswordValid = passwordRegex.test(password);
     if (isPasswordValid) {
       setStrength("strong");
@@ -51,13 +63,27 @@ const PassSignUp: React.FC<SplashProps> = ({ navigation }) => {
 
   return (
     <SafeAreaView>
+      <StatusBar style="light" />
       <SignUpNav navigation={navigation} pages={2} />
-      <View style={[styles.heading_container, { marginTop: moderateScale(25) }]}>
+      <View
+        style={[
+          styles.heading_container,
+          { marginTop: moderateScale(25) },
+        ]}
+      >
         <Heading text="Enter your password" />
         <Subheading text="You will use this email and password to log into your FitMate account." />
-        <Input onChangeText={(text) => handlePassword(text)} secureTextEntry={secureText} />
+        <Input
+          onChangeText={(text) => handlePassword(text)}
+          secureTextEntry={secureText}
+          autoFocus={true}
+        />
         <Pressable onPress={showPass}>
-          <Icon style={styles.icon} name={lockIcon ? "lock" : "lock-open"} size={25} />
+          <Icon
+            style={styles.icon}
+            name={lockIcon ? "lock" : "lock-open"}
+            size={25}
+          />
         </Pressable>
       </View>
       <View style={styles.strength_container}>
@@ -65,10 +91,15 @@ const PassSignUp: React.FC<SplashProps> = ({ navigation }) => {
         <Text
           style={{
             position: "absolute",
-            right: "-60px",
-            bottom: "5px",
-            width: "60px",
-            color: strength === "strong" ? "green" : strength === "medium" ? "blue" : "red",
+            right: -60,
+            bottom: 5,
+            width: 60,
+            color:
+              strength === "strong"
+                ? "green"
+                : strength === "medium"
+                ? "blue"
+                : "red",
           }}
         >
           {strength}
@@ -78,12 +109,17 @@ const PassSignUp: React.FC<SplashProps> = ({ navigation }) => {
         <Input onChangeText={setOtherPass} secureTextEntry={secureText} />
       </View>
       {!match && (
-        <Text style={{ position: "relative", color: "red", left: "25px" }}>
+        <Text style={{ position: "relative", color: "red", left: 25 }}>
           Passwords do not match
         </Text>
       )}
       <View style={styles.button_container}>
-        <Button disabled={isValid} label="Login" onPress={() => {}} outline />
+        <Button
+          disabled={isValid}
+          label="Login"
+          onPress={() => {}}
+          outline
+        />
       </View>
     </SafeAreaView>
   );
@@ -115,7 +151,7 @@ const styles = StyleSheet.create({
   },
   strength: {
     position: "absolute",
-    bottom: "5px",
+    bottom: 5,
   },
 });
 export default PassSignUp;

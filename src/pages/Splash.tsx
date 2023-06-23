@@ -7,6 +7,7 @@ import AppLoading from "expo-app-loading";
 import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "../colors";
 import { Divider } from "@rneui/themed";
+import { StatusBar } from "expo-status-bar";
 
 export type TopNavigatorParamsList = {
   Splash: undefined;
@@ -21,7 +22,7 @@ export interface SplashProps {
 const Splash: React.FC<SplashProps> = ({ navigation }) => {
   const loadFonts = async () => {
     await Font.loadAsync({
-      "AvenirNext-Regular": require("../../assets/fonts/AvenirNextLTPro-Regular.otf")
+      "AvenirNext-Regular": require("../../assets/fonts/AvenirNextLTPro-Regular.otf"),
     });
   };
 
@@ -29,15 +30,32 @@ const Splash: React.FC<SplashProps> = ({ navigation }) => {
     return <AppLoading />;
   }
   return (
-    <LinearGradient colors={["#2E2F2F", "#D1D6BA"]} style={styles.container}>
-      <Image source={require("../../assets/logo1.png")} style={styles.image} />
+    <LinearGradient
+      colors={["#2E2F2F", "#D1D6BA"]}
+      style={styles.container}
+    >
+      <StatusBar style="light" />
+      <Image
+        source={require("../../assets/logo1.png")}
+        style={styles.image}
+      />
       <View style={styles.headingContainer}>
-        <Text style={[styles.heading, { color: colors.secondary_green }]}>FIT</Text>
-        <Text style={[styles.heading, { color: colors.primary_green }]}>MATE</Text>
+        <Text style={[styles.heading, { color: colors.secondary_green }]}>
+          FIT
+        </Text>
+        <Text style={[styles.heading, { color: colors.primary_green }]}>
+          MATE
+        </Text>
       </View>
-      <Text style={styles.subheading}>Your Personal Fitness Companion</Text>
+      <Text style={styles.subheading}>
+        Your Personal Fitness Companion
+      </Text>
       <View style={styles.buttonContainer}>
-        <Button label="Get started" outline onPress={() => navigation.navigate("SignUp")} />
+        <Button
+          label="Get started"
+          outline
+          onPress={() => navigation.navigate("SignUp")}
+        />
         <Divider width={0.5} color="gray" />
         <Button label="Log in" onPress={() => {}} />
       </View>
@@ -49,22 +67,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    paddingTop: verticalScale(65)
+    paddingTop: verticalScale(65),
   },
   headingContainer: {
     textAlign: "center",
     textAlignVertical: "center",
-    flexDirection: "row"
+    flexDirection: "row",
   },
   background: {
     flex: 1,
     resizeMode: "cover",
-    zIndex: -1
+    zIndex: -1,
   },
   heading: {
     fontSize: moderateScale(80),
     fontWeight: "600",
-    fontFamily: "AvenirNext-Regular"
+    fontFamily: "AvenirNext-Regular",
   },
   subheading: {
     textAlign: "center",
@@ -72,21 +90,21 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(17),
     color: colors.secondary_green,
     fontFamily: "AvenirNext-Regular",
-    fontWeight: "600"
+    fontWeight: "600",
   },
   image: {
     width: horizontalScale(150),
     height: verticalScale(150),
     resizeMode: "contain",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   buttonContainer: {
     flex: 1,
     gap: moderateScale(10),
     paddingTop: verticalScale(400),
-    width: horizontalScale(380)
-  }
+    width: horizontalScale(380),
+  },
 });
 
 export default Splash;
