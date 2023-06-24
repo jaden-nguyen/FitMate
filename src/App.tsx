@@ -1,9 +1,22 @@
-import Splash from "./pages/Splash";
+import Splash from "./screens/Splash";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import SignUp from "./pages/Signup";
+import {
+  StackNavigationProp,
+  createStackNavigator,
+} from "@react-navigation/stack";
+import SignUp from "./screens/Signup";
 import { StatusBar } from "expo-status-bar";
-import PassSignUp from "./pages/PassSignUp";
+import PassSignUp from "./screens/PassSignUp";
+
+export type TopNavigatorParamsList = {
+  Splash: undefined;
+  SignUp: undefined;
+  PassSignUp: undefined;
+};
+export interface StackProps {
+  navigation: StackNavigationProp<TopNavigatorParamsList, "Splash">;
+  pages: 1 | 2;
+}
 
 const Stack = createStackNavigator();
 

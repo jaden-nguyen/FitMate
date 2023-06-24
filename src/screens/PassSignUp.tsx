@@ -5,7 +5,6 @@ import {
   Text,
   View,
 } from "react-native";
-import { SplashProps } from "./Splash";
 import SignUpNav from "../components/navbar/Navbar";
 import Heading from "../components/Heading";
 import Input from "../components/Input";
@@ -15,8 +14,9 @@ import { useEffect, useState } from "react";
 import Subheading from "../components/Subheading";
 import Icon from "react-native-vector-icons/Entypo";
 import { StatusBar } from "expo-status-bar";
+import { StackProps } from "../App";
 
-const PassSignUp: React.FC<SplashProps> = ({ navigation }) => {
+const PassSignUp: React.FC<StackProps> = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [otherPass, setOtherPass] = useState("");
   const [secureText, setSecureText] = useState(true);

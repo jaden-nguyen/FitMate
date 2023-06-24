@@ -8,8 +8,6 @@ import {
   Platform,
   TouchableOpacity,
 } from "react-native";
-import { heightPercentageToDP as hp } from "react-native-responsive-screen";
-import { SplashProps } from "./Splash";
 import { horizontalScale, moderateScale, verticalScale } from "../scales";
 import Button from "../components/Button";
 import Input from "../components/Input";
@@ -20,8 +18,9 @@ import Heading from "../components/Heading";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Terms from "../components/Terms";
 import { StatusBar } from "expo-status-bar";
+import { StackProps } from "../App";
 
-const SignUp: React.FC<SplashProps> = ({ navigation }) => {
+const SignUp: React.FC<StackProps> = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [date, setDate] = useState(new Date());
@@ -133,7 +132,7 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(10),
     padding: moderateScale(10),
     backgroundColor: colors.gray,
-    borderRadius: hp("1.3%"),
+    borderRadius: moderateScale(13),
   },
   input: {
     borderWidth: 1,

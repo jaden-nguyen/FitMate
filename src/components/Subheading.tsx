@@ -1,16 +1,12 @@
-import AppLoading from 'expo-app-loading';
-import { View, Text, StyleSheet } from 'react-native';
-import * as Font from 'expo-font';
-import { heightPercentageToDP } from 'react-native-responsive-screen';
+import AppLoading from "expo-app-loading";
+import { View, Text, StyleSheet } from "react-native";
+import * as Font from "expo-font";
+import { horizontalScale } from "../scales";
 
-interface HeadingProps {
-  text?: string;
-}
-
-const Subheading: React.FC<HeadingProps> = ({ text }) => {
+const Subheading = ({ text }: { text: string }) => {
   const loadFonts = async () => {
     await Font.loadAsync({
-      'AvenirNext-Regular': require('../../assets/fonts/AvenirNextLTPro-Regular.otf')
+      "AvenirNext-Regular": require("../../assets/fonts/AvenirNextLTPro-Regular.otf"),
     });
   };
 
@@ -26,8 +22,8 @@ const Subheading: React.FC<HeadingProps> = ({ text }) => {
 
 const styles = StyleSheet.create({
   heading: {
-    fontFamily: 'AvenirNext-Regular',
-    fontSize: heightPercentageToDP(1.5)
-  }
+    fontFamily: "AvenirNext-Regular",
+    fontSize: horizontalScale(14),
+  },
 });
 export default Subheading;

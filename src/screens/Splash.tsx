@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import Button from "../components/Button";
-import { StackNavigationProp } from "@react-navigation/stack";
 import { horizontalScale, moderateScale, verticalScale } from "../scales";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
@@ -8,18 +7,9 @@ import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "../colors";
 import { Divider } from "@rneui/themed";
 import { StatusBar } from "expo-status-bar";
+import { StackProps } from "../App";
 
-export type TopNavigatorParamsList = {
-  Splash: undefined;
-  SignUp: undefined;
-  PassSignUp: undefined;
-};
-export interface SplashProps {
-  navigation: StackNavigationProp<TopNavigatorParamsList, "Splash">;
-  pages: 1 | 2;
-}
-
-const Splash: React.FC<SplashProps> = ({ navigation }) => {
+const Splash: React.FC<StackProps> = ({ navigation }) => {
   const loadFonts = async () => {
     await Font.loadAsync({
       "AvenirNext-Regular": require("../../assets/fonts/AvenirNextLTPro-Regular.otf"),
