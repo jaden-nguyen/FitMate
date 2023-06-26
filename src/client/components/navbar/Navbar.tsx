@@ -6,10 +6,10 @@ import {
   moderateScale,
   verticalScale,
 } from "../../scales";
-import { SplashProps } from "../../screens/Splash";
 import Square from "react-native-vector-icons/FontAwesome";
+import { StackProps } from "../../types";
 
-const SignUpNav: React.FC<SplashProps> = ({ navigation, pages }) => {
+const SignUpNav: React.FC<StackProps> = ({ navigation, pages }) => {
   let square = pages === 2 ? "square" : "square-o";
   let squareSize = pages === 2 ? 28 : 30;
 

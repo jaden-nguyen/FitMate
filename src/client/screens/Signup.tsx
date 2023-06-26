@@ -18,7 +18,7 @@ import Heading from "../components/Heading";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Terms from "../components/Terms";
 import { StatusBar } from "expo-status-bar";
-import { StackProps } from "../App";
+import { StackProps } from "../types";
 
 const SignUp: React.FC<StackProps> = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -58,7 +58,7 @@ const SignUp: React.FC<StackProps> = ({ navigation }) => {
           placeholder="Name"
           onChangeText={setName}
           keyboardType="ascii-capable"
-          autoFocus={true}
+          autoFocus
         />
         <Input
           placeholder="Email"

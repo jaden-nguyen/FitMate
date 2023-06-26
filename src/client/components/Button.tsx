@@ -14,7 +14,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 const Button = ({ label, outline, onPress, disabled }: ButtonProps) => {
   const loadFonts = async () => {
     await Font.loadAsync({
-      "AvenirNext-Regular": require("../../assets/fonts/AvenirNextLTPro-Regular.otf"),
+      "AvenirNext-Regular": require("../../../assets/fonts/AvenirNextLTPro-Regular.otf"),
     });
   };
 

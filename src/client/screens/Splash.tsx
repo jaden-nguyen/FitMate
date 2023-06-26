@@ -7,12 +7,12 @@ import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "../colors";
 import { Divider } from "@rneui/themed";
 import { StatusBar } from "expo-status-bar";
-import { StackProps } from "../App";
+import { StackProps } from "../types";
 
 const Splash: React.FC<StackProps> = ({ navigation }) => {
   const loadFonts = async () => {
     await Font.loadAsync({
-      "AvenirNext-Regular": require("../../assets/fonts/AvenirNextLTPro-Regular.otf"),
+      "AvenirNext-Regular": require("../../../assets/fonts/AvenirNextLTPro-Regular.otf"),
     });
   };
 
@@ -26,7 +26,7 @@ const Splash: React.FC<StackProps> = ({ navigation }) => {
     >
       <StatusBar style="light" />
       <Image
-        source={require("../../assets/logo1.png")}
+        source={require("../../../assets/logo1.png")}
         style={styles.image}
       />
       <View style={styles.headingContainer}>
@@ -47,7 +47,10 @@ const Splash: React.FC<StackProps> = ({ navigation }) => {
           onPress={() => navigation.navigate("SignUp")}
         />
         <Divider width={0.5} color="gray" />
-        <Button label="Log in" onPress={() => {}} />
+        <Button
+          label="Log in"
+          onPress={() => navigation.navigate("PreLogin")}
+        />
       </View>
     </LinearGradient>
   );

@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import Subheading from "../components/Subheading";
 import Icon from "react-native-vector-icons/Entypo";
 import { StatusBar } from "expo-status-bar";
-import { StackProps } from "../App";
+import { StackProps } from "../types";
 
 const PassSignUp: React.FC<StackProps> = ({ navigation }) => {
   const [password, setPassword] = useState("");
@@ -76,7 +76,7 @@ const PassSignUp: React.FC<StackProps> = ({ navigation }) => {
         <Input
           onChangeText={(text) => handlePassword(text)}
           secureTextEntry={secureText}
-          autoFocus={true}
+          autoFocus
         />
         <Pressable onPress={showPass}>
           <Icon

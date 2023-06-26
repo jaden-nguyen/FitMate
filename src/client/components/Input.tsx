@@ -21,7 +21,7 @@ const Input: React.FC<InputProps> = ({
 }) => {
   const loadFonts = async () => {
     await Font.loadAsync({
-      "AvenirNext-Regular": require("../../assets/fonts/AvenirNextLTPro-Regular.otf"),
+      "AvenirNext-Regular": require("../../../assets/fonts/AvenirNextLTPro-Regular.otf"),
     });
   };
 
